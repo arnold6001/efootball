@@ -1,0 +1,16 @@
+<% layout('layout') -%>
+<div class="container mx-auto p-6">
+  <h1 class="text-4xl font-bold text-green-400 mb-6">Welcome, <%= user.username %>!</h1>
+  <a href="/tournament/create" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-bold inline-block mb-6">+ Create Tournament</a>
+
+  <h2 class="text-2xl mb-4">Your Tournaments</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <% tournaments.forEach(t => { %>
+      <div class="bg-gray-800 p-6 rounded-xl" data-aos="fade-up">
+        <h3 class="text-xl font-bold"><%= t.name %></h3>
+        <p><%= t.players.length %> players</p>
+        <a href="/tournament/<%= t._id %>" class="text-green-400">View →</a>
+      </div>
+    <% }) %>
+  </div>
+</div>
