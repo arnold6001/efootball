@@ -1,0 +1,13 @@
+<% layout('layout') -%>
+<div class="min-h-screen flex items-center justify-center bg-gray-800">
+  <form method="POST" class="bg-gray-900 p-8 rounded-xl shadow-2xl w-96" data-aos="zoom-in">
+    <h2 class="text-3xl font-bold text-center text-green-400 mb-6"><%= title || 'Register' %></h2>
+    <input type="text" name="username" placeholder="Username" required class="w-full p-3 mb-4 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-green-500"/>
+    <% if (!title) { %>
+      <input type="email" name="email" placeholder="Email" required class="w-full p-3 mb-4 bg-gray-800 border border-gray-700 rounded-lg"/>
+    <% } %>
+    <input type="password" name="password" placeholder="Password" required class="w-full p-3 mb-6 bg-gray-800 border border-gray-700 rounded-lg"/>
+    <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition">Submit</button>
+    <p class="text-center mt-4"><a href="<%= title ? '/register' : '/login' %>" class="text-green-400"><%= title ? 'Register' : 'Login' %> instead</a></p>
+  </form>
+</div>
