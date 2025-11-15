@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Rajdhani:wght@600&display=swap');
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+  color: #eee;
+}
+
+h1, h2, h3 { font-family: 'Orbitron', sans-serif; }
+
+input, button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,255,0,0.2);
+}
+
+.bg-green-600 { background: #16a34a; }
+.hover\:bg-green-700:hover { background: #15803d; }
+
+.text-green-400 { color: #86efac; }
+
+/* Animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse { animation: pulse 2s infinite; }
