@@ -6,13 +6,5 @@ services:
     buildCommand: npm install
     startCommand: node server.js
     envVars:
-      MONGODB_URI: 
-        fromDatabase:
-          name: efootball-db
-          property: connectionString
-      SESSION_SECRET: your-secret-here-123
+      SESSION_SECRET: efootball-freaks-arnold-2025
       NODE_ENV: production
-
-databases:
-  - name: efootball-db
-    plan: free
