@@ -1,0 +1,63 @@
+<% layout('layout') -%>
+<div class="container mx-auto p-6">
+  <h1 class="text-4xl font-bold text-green-400 mb-4"><%= tournament.name %></h1>
+  <p class="mb-6">Created by <%= tournament.createdBy %></p>
+
+  <% if (!tournament.fixtures.length) { %>
+    <form method="POST" action="/tournament/generate/<%= tournament._id %>">
+      <button class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg font-bold">Generate Fixtures</button>
+    </form>
+  <% } %>
+
+  <div class="grid md:grid-cols-2 gap-8 mt-8">
+    <!-- Fixtures -->
+    <div>
+      <h2 class="text-2xl mb-4">Fixtures</h2>
+      <% tournament.fixtures.forEach((f, i) => { %>
+        <div class="bg-gray-800 p-4 rounded mb-3 flex items-center justify-between">
+          <div>
+            <strong><%= f.home %></strong> vs <strong><%= f.away %></strong>
+            <% if (f.played) { %> <span class="text-green-400">(<%= f.homeScore %> - <%= f.awayScore %>)</span><% } %>
+          </div>
+          <% if (!f.played) { %>
+            <form method="POST" action="/tournament/score/<%= tournament._id %>" class="flex gap-2">
+              <input type="hidden" name="fixtureIndex" value="<%= i %>">
+              <input type="number" name="homeScore" min="0" max="20" required class="w-16 p-1 text-black">
+              <span>-</span>
+              <input type="number" name="awayScore" min="0" max="20" required class="w-16 p-1 text-black">
+              <button class="bg-green-600 px-3 rounded">Save</button>
+            </form>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+
+    <!-- Standings -->
+    <div>
+      <h2 class="text-2xl mb-4">Standings</h2>
+      <table class="w-full bg-gray-800 rounded">
+        <thead>
+          <tr class="bg-gray-700">
+            <th class="p-3 text-left">Player</th>
+            <th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% tournament.standings.forEach(s => { %>
+            <tr class="border-t border-gray-700">
+              <td class="p-3"><%= s.player %></td>
+              <td class="text-center"><%= s.played %></td>
+              <td class="text-center"><%= s.won %></td>
+              <td class="text-center"><%= s.drawn %></td>
+              <td class="text-center"><%= s.lost %></td>
+              <td class="text-center"><%= s.gf %></td>
+              <td class="text-center"><%= s.ga %></td>
+              <td class="text-center"><%= s.gd %></td>
+              <td class="text-center font-bold"><%= s.points %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
